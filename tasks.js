@@ -48,13 +48,13 @@ const tasks = [{
   }
 },{
   name: 'test',
-  run: function({ answers, logger, projPath, next }) {
+  run: function({ answers, logger, cwd, next }) {
     // 不执行下个任务
     next({ err: true });
   }
 },{
   name: 'lalala',
-  run: function({ answers, logger, projPath, next }) {
+  run: function({ answers, logger, cwd, next }) {
     // 该任务不会被执行
     next({ err: false });
   }

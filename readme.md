@@ -3,18 +3,38 @@
 ## 插件结构
 
 ```
-|- plugin.js  配置文件
+|- index.js  模块清单
+|- pretask.js 预执行任务
+|- promts.js 提问模板
+|- tasks.js  主任务文件
 |- package.json
 |- readme.md
 ```
 
-配置文件中包含三部分，`name` & `promts` & `task`。具体请看 `plugin.js` 文件的注释。
+模块中包含四部分，`name` & `promts` & `tasks` & `pretask`。
+
+* name 必须     表单名字
+* pretask 可选  预执行任务
+* promts 可选   提问模板
+* tasks 必须    主任务队列
+
+### 执行顺序
+
+插件执行流程为 pretask -> promts -> tasks
 
 
-// 提交
+如果希望用户填写信息然后执行任务，可以使用 `promts` 配置表单信息。
+
+如果希望用户表单内容是通过其他代码获取数据才能渲染的，可以使用 `pretask`。
+
+
+具体请看每个文件的注释。
+
+
+## 提交
 写好插件之后请使用 tnpm || npm 提交。
 
-// 如何测试
+## 如何测试
 
 可以联系我测试，提issue 或者手动测试，比较麻烦。
 

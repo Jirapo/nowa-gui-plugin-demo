@@ -2,7 +2,7 @@
 * 
 * promts 表示需要用户填写的信息，可以是函数或者数组
 * 如果是函数，包含一个参数，表示从预执行任务获取的 data， 必须返回一个数组
-* 支持 input，select，switch，checkbox 4种类型 
+* 支持 input，select，switch，checkbox, text 5种类型 
 * 可以参考 antd 的表单 https://ant.design/components/form-cn/
 *
 */
@@ -49,6 +49,15 @@ const promts = function(anwsers) {
       },
       default: true,
       type: 'switch'
+    },
+    {
+      key: 'date',
+      label: {
+        zh: '时间',
+        en: 'Time',
+      },
+      value: new Date(),
+      type: 'text'
     }
   ];
 };

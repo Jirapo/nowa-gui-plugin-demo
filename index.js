@@ -5,7 +5,7 @@ const tasks = require('./tasks');
 // 插件名字
 const name = {
   zh: '插件名',
-  en: 'PluginName'
+  en: 'plugin'
 };
 
 

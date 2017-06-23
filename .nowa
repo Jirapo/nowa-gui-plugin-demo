@@ -1,0 +1,10 @@
+{
+  "pluginConfig": {
+    // 插件名字
+    "pluginName": {
+
+      // 属性参数
+      // 比如 open: true
+    },
+  }
+}

@@ -3,10 +3,11 @@
 ## 插件结构
 
 ```
-|- index.js  模块清单
+|- index.js   模块清单
 |- pretask.js 预执行任务
-|- promts.js 提问模板
-|- tasks.js  主任务文件
+|- promts.js  提问模板
+|- tasks.js   主任务文件
+|- .nowa      属性配置文件
 |- package.json
 |- readme.md
 ```
@@ -29,6 +30,13 @@
 
 
 具体请看每个文件的注释。
+
+## .nowa 配置文件
+
+在插件运行时外的一份配置文件，用来表示插件的特征，这不应该是通过 `promts` 得到的答案。
+
+后期会在nowa中可视化显示。
+
 
 
 ## 提交

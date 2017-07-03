@@ -1,12 +1,16 @@
 {
   "name": "nowa-gui-plugin-demo",
-  "version": "1.0.2",
+  "version": "1.0.3-beta.4",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node test.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "nowa-gui-plugin": "^1.0.0"
+  }
 }

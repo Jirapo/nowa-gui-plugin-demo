@@ -7,59 +7,58 @@
 *
 */
 
-const promts = function(anwsers) {
-  return [
-    {
-      key: 'name',  // 用来标识问题
-      label: {
-        zh: '名字',
-        en: 'Name',
-      },
-      default: anwsers.name, // 可选，默认值
-      validator: {  // 可选，校验
-        func: (value) => /\w+$/.test(value), // 校验函数
-        msg: 'Invalid Name'  // 校验出错信息
-      },
-      type: 'input',
+const promts = [
+  {
+    key: 'name',  // 用来标识问题
+    label: {
+      zh: '名字',
+      en: 'Name',
     },
-    {
-      key: 'lang',
-      label: {
-        zh: '语言',
-        en: 'Language',
-      },
-      values: ['en', 'zh'],
-      default: 'en',
-      type: 'select',
+    default: anwsers.name, // 可选，默认值
+    validator: {  // 可选，校验
+      func: (value) => /\w+$/.test(value), // 校验函数
+      msg: 'Invalid Name'  // 校验出错信息
     },
-    {
-      key: 'task',
-      label: {
-        zh: '任务',
-        en: 'Tasks',
-      },
-      type: 'checkbox',
-      values: ['eslint', 'test']
+    type: 'input',
+  },
+  {
+    key: 'lang',
+    label: {
+      zh: '语言',
+      en: 'Language',
     },
-    {
-      key: 'fix',
-      label: {
-        zh: '自动修复',
-        en: 'Fix',
-      },
-      default: true,
-      type: 'switch'
+    values: ['en', 'zh'],
+    default: 'en',
+    type: 'select',
+  },
+  {
+    key: 'task',
+    label: {
+      zh: '任务',
+      en: 'Tasks',
     },
-    {
-      key: 'date',
-      label: {
-        zh: '时间',
-        en: 'Time',
-      },
-      value: new Date(),
-      type: 'text'
-    }
-  ];
-};
+    type: 'checkbox',
+    values: ['eslint', 'test']
+  },
+  {
+    key: 'fix',
+    label: {
+      zh: '自动修复',
+      en: 'Fix',
+    },
+    default: true,
+    type: 'switch'
+  },
+  {
+    key: 'date',
+    label: {
+      zh: '时间',
+      en: 'Time',
+    },
+    value: new Date(),
+    type: 'text'
+  }
+];
+
 
 module.exports = promts;

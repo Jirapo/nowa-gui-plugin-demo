@@ -3,37 +3,134 @@
 ## 插件结构
 
 ```
-|- index.js   模块清单
-|- pretask.js 预执行任务
-|- promts.js  提问模板
-|- tasks.js   主任务文件
+|- index.js   主文件
 |- .nowa      属性配置文件
 |- package.json
 |- readme.md
 ```
 
-模块中包含四部分，`name` & `promts` & `tasks` & `pretask`。
+### 初始化
 
-* name 必须     表单名字
-* pretask 可选  预执行任务
-* promts 可选   提问模板
-* tasks 必须    主任务队列
+```
+const Plugin = require('nowa-gui-plugin');
 
-### 执行顺序
+const name = {
+  zh: '插件',
+  en: 'Plugin'
+};
 
-插件执行流程为 pretask -> promts -> tasks
+const plugin = new Plugin(name);
+```
+
+### 使用
+
+plugin 有个 `use` 方法，里面需要传入一个 generator function，表示插件执行的逻辑。
+
+函数有一个参数 `ctx`，该参数包含如下字段：
+
+*  logger  打印函数，用于将文本显示到 gui 的控制台中，需要手动加上`\n`
+*  cwd     当前项目路径
+*  renderPromts  渲染 gui 的提问模板表单
+*  config    插件设置, .nowa文件内容
 
 
-如果希望用户填写信息然后执行任务，可以使用 `promts` 配置表单信息。
+```
+// 这个插件将会打印一条语句，并且弹出一个提问框
 
-如果希望用户表单内容是通过其他代码获取数据才能渲染的，可以使用 `pretask`。
+plugin.use(function* ({
+  logger,
+  cwd,
+  renderPromts,
+  config,
+}) {
+  logger('in demo plugin\n');
+  const res = yield renderPromts([{
+    key: 'name',  // 用来标识问题
+    label: {
+      zh: '名字',
+      en: 'Name',
+    },
+    default: anwsers.name, // 可选，默认值
+    validator: {  // 可选，校验
+      func: (value) => /\w+$/.test(value), // 校验函数
+      msg: 'Invalid Name'  // 校验出错信息
+    },
+    type: 'input',
+  }]);
 
+  console.log('res', res);
+});
 
-具体请看每个文件的注释。
+```
+
+具体内容可以查看 `index.js`。
+
+## 提问模板
+
+支持 input，select，switch，checkbox, text 5种类型
+
+可以参考 antd 的表单 https://ant.design/components/form-cn/
+
+### example
+
+```
+[
+  {
+    key: 'name',  // 用来标识问题
+    label: {
+      zh: '名字',
+      en: 'Name',
+    },
+    default: anwsers.name, // 可选，默认值
+    validator: {  // 可选，校验
+      func: (value) => /\w+$/.test(value), // 校验函数
+      msg: 'Invalid Name'  // 校验出错信息
+    },
+    type: 'input',
+  },
+  {
+    key: 'lang',
+    label: {
+      zh: '语言',
+      en: 'Language',
+    },
+    values: ['en', 'zh'],
+    default: 'en',
+    type: 'select',
+  },
+  {
+    key: 'task',
+    label: {
+      zh: '任务',
+      en: 'Tasks',
+    },
+    type: 'checkbox',
+    values: ['eslint', 'test']
+  },
+  {
+    key: 'fix',
+    label: {
+      zh: '自动修复',
+      en: 'Fix',
+    },
+    default: true,
+    type: 'switch'
+  },
+  {
+    key: 'date',
+    label: {
+      zh: '时间',
+      en: 'Time',
+    },
+    value: new Date(),
+    type: 'text'
+  }
+]
+```
 
 ## .nowa 配置文件
 
-在插件运行时外的一份配置文件，用来表示插件的特征，这不应该是通过 `promts` 得到的答案。
+在插件运行时外的一份配置文件，用来表示插件的特征，这不应该是通过提问模板得到的答案。
 
 后期会在nowa中可视化显示。
 

@@ -172,7 +172,7 @@ plugin.use(function* ({
 
 https://github.com/nowa-webpack/nowa-gui
 
-找到 `src/renderer/models/plugin.js` 中的 `nowa-gui-plugins` 更换为 `my-nowa-gui-plugins`
+找到 `src/renderer/constants.js` 中的 `GUI_PLUGIN_NPM` 字段 `nowa-gui-plugins-test` 更换为 `my-nowa-gui-plugins`
 
 那么启动 gui 的时候，可以在设置页面中的插件设置里面看到 `my-nowa-gui-plugins`里面列出来的组件。
 
